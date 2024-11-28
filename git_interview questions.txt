@@ -1,0 +1,1111 @@
+Git interview Questions
+---------------------------------------
+
+1. What is git ?
+2. What is Version control system and also write advantages of VCS ?
+3. What is difference between CVCS and DVCS ?
+4. What does the command 'git config' do ?
+5. What is conflict  in git ?
+6. What is staging area or index , define it , in context of git ?
+7. Why is it considered easy to work on git ?
+8. What is the difference between GIT and SVN ?
+9. What is difference between GIT and GITHUB ?
+10. What language  is used in GIT ?
+11. What are various git repository hosting functions ?
+12. What is repository in GIT?
+13. What is bare repository in GIT ?
+14. What is commit message ?
+15. Explain some basics GIT command ?
+16. How do you resolve a conflict in GIT ?
+17. How do you revert a commit that has already been pushed and made public ?
+18. What is subgit ?
+19. What is the difference  between "GIT PULL" and "GIT FETCH" ?
+20. What is the use of gitweb ?
+21. What is " git ls-tree"?
+22. What is git stash?
+23. What is the function of "git stash apply"?
+24. What work is restored when the deleted branch is recovered ?
+25. Explain the difference between git status and git diff ?
+26. Mention the difference between "git clone " and "git remote"
+27. What is git stash drop?
+28. How to find a list of files that changed during a commit ?
+29. What does commit object contain ?
+30. Describe the branching strategies that you have used ?
+31. Explain the advantages of forking workflow?
+32. How to check whether a branch has already been merged into the master ?
+33. Why is it desirable to create an additional commit rather than amending an existing commit ?
+34. What is hook comprise of in git ?
+35. How do you return a commit that has just been pushed and made open ?
+36. How to remove a file from git without removing it from your file system ?
+37. What is difference between fork and clone ?
+38. Explain the difference between head , working tree and index ?
+39. Could you explain git workflow ?
+40. What are the different ways by which you can refer to a commit  ?
+41. What is the difference between rebashing and merge ?
+42. Mention the difference between revert and reset ?
+43. How to squash last N commits into a single commit?
+44. What is git bisect? How do you use it to determine the source of a bug?
+45. How to integrate git with Jenkins ?
+46. How do you configure a repository to run code sanity checking tools right before making commits ?
+47. What is git cherry-pick?
+48. What is git reflog?
+49. How to recover a deleted branch using git reflog ?
+50. Mention some of the git reflog sub commands ?
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GIT scenario based interview questions
+
+1. How will you know in git if a branch has been already merged into master?
+2. How can you bring a new feature in the main branch?
+3. I want to delete branch both locally and remotely? how you can do that ?
+4. What is difference between 'git remote' and 'git clone'?
+5. How can you fix a broken commit?
+6. Why is it desirable or advisable to create an additional commit rather than amending an existing commit ?
+7. can you please tell me layman terminologies difference between git and github?
+8. How do you find  a list of files that has changed in a particular commit?
+9. One of your teammates accidentally deleted a branch, and has already pushed the changes to the centralgit repo.There are no other git repos,and none of your other teammates had a local copy, How would you recover this branch?
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ANSWERS----
+
+
+
+1 .What is git ?
+==================
+
+GIT is a distributed version control system tool used for tracking changes in source code during software development .
+
+
+
+
+2.What is version control system and also write advantages of VCS ?
+===================================================================
+
+version control system is a system in which we track all changes In our source code , there are two types of VCS-
+
+   a.CVCS (Centralized version control system)
+   b.DVCS (Distributed version control system)
+
+
+Advantages of version control system ----
+
+  .History tracking
+  .Collaboration of team 
+  .Code revert and rollback 
+  .Backup and disaster recovery
+  
+  
+  
+3. What is difference between CVCS and DVCS ?
+==============================================
+local  repo 
+internet 
+speed
+if central repo crashes 
+
+
+
+4. What does the command 'git config' do ?
+===========================================
+
+
+This command modifies the Content of Git config file ,so that we can customize how the git will work for us before you start using git for a project. These files store information such as your username, default editor, and the email you want to associate with your commits.
+
+
+Configuration values can be set at three different levels:
+
+–local: Local values will be applied to the repository in which the git config command is executed. These values are stored in (.git/config) inside a repository.
+
+–system: System values are applied to all users on a machine. You should set system-level configuration values with caution because it may alter existing configurations. These values are stored in (/etc/gitconfig) on Linux.
+
+–global: Global values are applied to a particular user on an operating system. They are stored within the ((~/.gitconfig file)) in your home directory.
+
+
+Setting username and email 
+
+At global level----
+
+
+git config --global user.name "NAME"
+git config --global user.email "EMAIL"
+
+
+
+Setting default code editor
+
+At global level----
+
+git config --global core.editor "nano"
+git config --global core.editor "vi"
+
+
+Setting aliases
+
+At global level----
+
+git config --global alias.<alias> "<command>"
+
+example--
+
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+
+
+
+5. What is conflict  in git ?
+=============================
+
+A git conflict issue arises when two or more contributors make conflicting changes to the same line of the code file in their branches and try to merge them but then git will tell you there is a conflict.
+
+For example -- one is trying to delete that line and another is trying to edit that line and then both are trying to merge them then the conflict issue occure.
+
+types of git merge conflicts-- there are two types of git merge conflicts: at the start and during the merging process.
+
+
+
+At the start of the merge ----	
+
+Git merge will fail at the start if there are changes in staging area.It fails at the start to prevent the changes from being overwritten by incoming  merge commits .
+
+
+During the merge ----
+
+A failure during a merge means that there is a conflict between the source and target branch where multiple developers have modified the same file. if the automatic merge fails,git will ask you to resolve this issue manually.
+															
+Step1: Identify the conflict
+----------------------------
+Git will notify you about the conflicting files during the merge process. You can also use { git status } to see which file have conflicts .
+
+
+Step2: open the conflicting file 
+--------------------------------
+
+Step3: locate the conflict markers 
+----------------------------------
+Inside the conflicting file ,git will mark the conflicting sections with "<<<<<<<", "=======" and ">>>>>>>" , these markers indicate the conflicting changes between branches being merged .
+
+Step4: Edit the file to resolve the conflict 
+---------------------------------------------
+Decide which changes to keep or modify .
+
+Step5: Save the changes 
+-----------------------
+once you have resolved the conflicts , save the file .
+
+Step6: Add the resolved file to the staging area 
+------------------------------------------------
+Use  "git add <file_name>" to stage the resolved file for the commit.
+
+Step7: Commit the changes 
+-------------------------
+after resolving all conflicts and staging all resolved files , commit the changes using git commit.
+
+Step:8 complete the merge 
+--------------------------
+
+If you were in the middle of a merge operation , complete it using git merge --continue .
+
+
+
+Alternatively , if you decide to abort the merge:
+
+If you encounter difficulties resolving conflicts or decide to cancel the merge process , you can abort it using "git merge --abort"																																
+6. What is staging area or index , define it , in context of git ?
+===========================================================
+
+The staging area is the middle ground between what you have done in working directory and what you had last committed, the good feature of staging area is, we can choose  which file need to commit or which not according to our requirement.																																					
+
+7. Why is it considered easy to work on git ?
+=============================================
+
+Git is a distributed version control system , which allow user --
+
+-To work offline
+-User will have entire history of the code in his own hard disk
+-DVCS is faster than CVCS because we don't need to communicate with remote server or central repo for each and every thing, we do everything locally.
+-In DVCS if the main server goes down, you can still get the entire history of the code from the local repository.
+
+
+8. What is the difference between GIT and SVN ?
+================================================
+
+SVN Stands for subversion,it is centralized version control system. While Git is a distibuted version control system.
+
+
+9.  What is difference between GIT , GITHUB and GITLAB ?
+================================================
+
+Git is a version control system  tool (VCS) which tracks all changes in code . while github and gitlab are web-based plateform which provides a platform for  storing , managing and sharing git repositories in a centralized manner.
+ 
+
+
+10. What language  is used in GIT ?
+===================================
+
+GIT is written primarily in C language.
+
+
+11. What are various git repository hosting functions ?
+=======================================================
+
+Github (web-based plateform) provides a platform for  storing , managing and sharing git repositories in a centralized manner.
+
+
+12. What is repository in GIT?
+==============================
+
+In git , a repository , often shortened as "repo" . It is a central storage where we store our updated code with all versions.There are basically two types of repository-
+
+-Bare repository= it is a central repository where we store our code 
+-non bare repository= local repository where we commit our code from staging 																																																		
+13. What is bare repository in GIT ?
+====================================
+
+14. What is commit message ?
+==============================
+Git tool is a collaborative tool multiple user work on same project so to make our commit more understandable we add commit message with commit 
+
+syntax-   git commit -m <message>																
+
+
+15.Explain some basics GIT command ?
+=====================================
+
+
+
+gitinit----- git initialize , this command will convert our directory into three logical area (Working space,staging area,local repository)
+
+git status -------to check workspace tree , is anything staged or committed.
+
+git add. ---------this command is used to add code from workspace to stage area.
+
+git commit -m <message>	-----this command is used to send or commit code from staging to Local repository
+
+git log------this command is used for finding out commit id and logs of all commit 
+
+git show  <commit id>
+
+git remote add origin <github URL>
+
+git remote set-url origin https://PAT@<github URL>
+
+git push origin master
+
+git pull origin master
+
+
+
+
+
+
+
+
+a.Basic commands related to Branch
+-----------------------------------
+  
+To see list of available branches--------------git branch 
+
+To create a new branch ------------------------git branch <branch_name>
+
+To Switch branch from one to another-----------git checkout <Name of branch you want to go>
+
+To delete a branch ----------------------------git branch -d <branch_name>
+                                               git branch -D <branch_name>
+
+To merge branch--------------------------------git merge <branch_name>
+
+
+
+b.Commands for git stashing 
+---------------------------
+
+c.Commands for git Reset 
+------------------------
+
+
+
+d.Commands for git revert
+-------------------------
+Git revert is a command in git used  to undo changes made in a commit by creating a new commit that inversely applies those changes.
+git revert is usefull for undoing specific commit without altering the project's history.
+
+
+git revert <Commit-id>
+
+																																																
+16. How do you resolve a conflict in GIT ?
+===========================================
+
+
+A git conflict issue arises when two or more contributors make conflicting changes to the same line of the code file in their branches and try to merge them but then git will tell you there is a conflict.
+
+For example -- one is trying to delete that line and another is trying to edit that line and then both are trying to merge them then the conflict issue occure.
+
+types of git merge conflicts-- there are two types of git merge conflicts: at the start and during the merging process.
+
+
+
+At the start of the merge ----	
+
+Git merge will fail at the start if there are changes in staging area.It fails at the start to prevent the changes from being overwritten by incoming  merge commits .
+
+
+During the merge ----
+
+A failure during a merge means that there is a conflict between the source and target branch where multiple developers have modified the same file. if the automatic merge fails,git will ask you to resolve this issue manually.
+															
+Step1: Identify the conflict
+----------------------------
+Git will notify you about the conflicting files during the merge process. You can also use { git status } to see which file have conflicts .
+
+
+Step2: open the conflicting file 
+--------------------------------
+
+Step3: locate the conflict markers 
+----------------------------------
+Inside the conflicting file ,git will mark the conflicting sections with "<<<<<<<", "=======" and ">>>>>>>" , these markers indicate the conflicting changes between branches being merged .
+
+Step4: Edit the file to resolve the conflict 
+---------------------------------------------
+Decide which changes to keep or modify .
+
+Step5: Save the changes 
+-----------------------
+once you have resolved the conflicts , save the file .
+
+Step6: Add the resolved file to the staging area 
+------------------------------------------------
+Use  "git add <file_name>" to stage the resolved file for the commit.
+
+Step7: Commit the changes 
+-------------------------
+after resolving all conflicts and staging all resolved files , commit the changes using git commit.
+
+Step:8 complete the merge 
+--------------------------
+
+If you were in the middle of a merge operation , complete it using git merge --continue .
+
+
+
+Alternatively , if you decide to abort the merge:
+
+If you encounter difficulties resolving conflicts or decide to cancel the merge process , you can abort it using "git merge --abort"																																
+				
+17. What is git revert , git reset and git stashing ?
+=====================================================
+
+
+NOTE-- Git revert and Git reset  are important commands for performing undo operations.
+
+Git revert- The purpose of git revert command is to remove all the changes a single commit made to your source code repo by creating a new commit , without deleting the commit history.
+----------
+
+Syntax- git revert <Commit-id>																								
+
+Git reset- 
+---------
+
+
+				
+18. What is subgit ?
+=====================
+
+Subgit is a tool for migrating from  SVN to git.
+
+
+
+19. What is the difference  between "GIT PULL" and "GIT FETCH" ?
+=================================================================
+
+GIT PULL == GIT Fetch (fetch the update from remote repo to local repo) + GIT merge or GIT rebash 
+
+
+GIT FETCH ---- GIT fetch command fetches all changes from the remote repository to local repository without bringing the changes into the working directory. 
+
+GIT PULL ----- GIT PULL command pull all the changes from remote repository to the current working directory.
+
+
+20. What is the use of gitweb ?
+================================
+
+Gitweb is a simple web interface , that allows you to view all of your remote git repository, track progress , view logs , with an attractive web interface.
+
+ 
+21. What is " git ls-tree"?
+
+In GIT, the "git ls-tree" command allows you to list the contents of a tree object, where tree object represents a directory in the git repository.
+
+
+22. What is git stash?
+======================
+
+GIT stash command allows the user to preserve the changes separatly without committing those changes.
+
+Eg: If a developer is working on a project and in between he get another work to do urgently in working directory then we will keep that ongoing code in stash without committing it to local repo.
+
+
+23. Explain git stash , git stash save "message" ,git stash list, stash show , git stash apply, git stash pop ?
+===============================================================================================================
+
+git stash-- git stash command is used for keeping the changes separatly without committing those changes, and use those changes in future whenever is required.
+
+git stash list-- it will list out all stashes
+
+git stash show-- it will shows the changes in the most recent stash.
+
+                   syntax--- git stash show <Stash_id>
+
+git stash apply--- it applies the most recent stash to the working directory  without removing it from stash list .
+
+                   Syntax--- git stash apply stash@{1}
+ 
+git stash pop-----it applies the most recent stash and remove it from the stash list
+
+                   Synrtax--- git stash pop stash@{1}
+
+git stash drop---- deletes the most recent stash .
+
+git stash clear--- remove all stashes .
+
+
+
+
+ 
+25. Explain the difference between git status and git diff ?
+=============================================================
+git status---- this command displays the state of the working directory and the staging area 
+
+git diff------ git diff command is used to display difference between two commits,between the working directory and the staging area or between the staging  area and a specific commit. 
+
+
+
+26. Mention the difference between "git clone " and "git remote"
+================================================================
+
+git clone----git clone command is used to create a copy of a git repository on your local machine,it downloads the entire repository ,including all branches and commit history. It allows user to work on project locally.
+
+git remote---git remote is a command in git used to manage connections to remote repositories.It allows you to list ,add,rename and remove connections to remote repositories.
+              
+             git remote -v (list out all remote repositories associated with your local repositories)
+             git remote add <name> <URL>
+             git remote rename <old_name> <new_name>
+             git remote remove <name>
+             
+              
+27. What is git stash drop?
+===========================
+
+this command will delete the most recent stash from stash list.
+
+
+28. How to find a list of files that changed during a commit ?
+==============================================================
+
+git diff --name-only <commit_id> --------this will display filenames of those files which has been modified during a specific commit
+
+or 
+
+git show --name-only <commit_id>
+
+
+29. What does git commit object contain ?
+======================================
+
+A git commit object contains several pieces of information -
+
+-Commit ID
+-Author and committer information 
+-Timestamps
+-commit message 
+-parent commits 
+-tree object
+-meta data
+
+30. Describe the branching strategies that you have used ?
+===========================================================
+
+Branching 
+
+
+
+
+
+32. How to check whether a branch has already been merged into the master ?
+
+
+git branch --merged master --------lists branches that merged into master
+
+git branch --no-merged master -----lists branches that are not merged to master 
+
+git branch --merged  --------------lists brnaches that are merged with head (current branch)
+
+
+
+
+
+33. Why is it desirable to create an additional commit rather than amending an existing commit ?
+================================================================================================
+
+
+It is always advisable to create an additional commit rather than amending the existing commit due to the following reasons--
+
+-------Doing the amend operation destroys the previously saved state of that commit .if only the commit message gets destroyed , it's acceptable but there might be cases when the contents of the commits get amended.This results in the loss of important information associated with the commit.
+
+
+
+34. What is hook comprise of in git ?
+=====================================
+
+git hooks are basically scripts found in the hidden .git/hooks directory of a git repository that you can trigger during git events like commit , push or rebash etc. to automate developoment lifecycle.
+
+
+35. How do you return a commit that has just been pushed and made open ?
+========================================================================
+
+
+
+36. How to remove a file from git without removing it from your local file system?
+==================================================================================
+
+If developers want to remove a particular file from git repository without deleting it from local file system, follow the bellow-given instructions---
+
+step1- Go to the particular repository (cd 'complete path of git repository')
+
+step.2- Display the current repository list of content .(ls)
+
+step.3- select the particular file    
+
+step.4- git rm --cached <filename>   
+
+
+
+37. What is difference between fork and clone ?
+===============================================
+
+Clone--Cloning a repository means creating  a local copy of a repository with its history and branches from github to your local machine .
+       
+
+       Note: Cloning a repository creates a local copy that is linked to the remote repository, which allow you to synchronize changes between  your local copy and the original one. 
+       
+       command-- git clone <URL>
+
+
+Fork--Forking a repository is a concept  commonly  used in plateforms like Github,Gitlab and bitbucket.
+      forking a repository means creating a copy of repository on one of these plateform under your personal account.This copy of repository is not linked with the origianal one , so any  changes you make to your fork do not affect the original repository.
+
+       
+      Command:  
+
+              step1: git --version
+             
+              step2: git auth login --web
+
+              step3: gh repo fork <URL>
+
+
+
+38. Explain the difference between head , working tree and index ?
+==================================================================
+
+
+Head -------------In git , Head is the most recent commit on the current branch you are working on.
+
+Index area--------The index area ,  also known as the staging area , the purpose of this area is to let you pick which files are going to be commited and which not.
+
+Working tree------The working tree in git refers to the  directory , where you are currently working  on your project files.
+
+
+
+NOTE=== When you modify files in your working tree , git notices these changes , but they are not automatically saved to the repository.Instead, you need to add and commit them  to make them part of your projrct's history.
+
+
+
+39. Could you explain git workflow ?
+====================================
+
+  Step.1  Set up git and repository
+  ---------------------------------
+  
+  a. Download and Install git 
+  
+  b. Configure your git setting 
+  
+     git config --global user.name "Your anme"
+     git config --global user.email "Your Email"
+	 
+  c. Initialize a repository 
+  
+     To create a new repository:
+	 
+	 mkdir my_project
+	 cd my_project
+	 git init  
+	 
+	 
+  d. Fork the repository 
+
+  
+	 
+  e. Clone an fork repository to your local machine 
+  
+     If you need to work on an existing project 
+
+     git clone <URL>
+   
+     cd repo   
+	 
+
+  Step.2  Branching 
+  -----------------
+
+  a. Create a new branch
+    
+	 It's common practice to create a new branch for each feature or bug fix .
+	 
+	 command-- git checkout -b <Branch_name >
+	 
+  
+  b. Switch between branches 
+
+     To work on a different branch , switch branch using 
+
+     command-- git checkout <Branch_name>	 
+	 
+	 
+  Step.3 Make changes
+  -------------------
+  
+     Make changes to your files using your preferred code editor in your working space 
+	 
+	 
+	 
+  Step.4 Stage All Changes 
+  ------------------------
+  
+    Stage Your All Changes By Using Following Command --
+	
+	Command-- 
+	
+	To Stage A Particular File 
+	
+	  Git Add <File_Name>
+	
+	To Stage All Changes 
+	
+	  git add .
+	  
+ 
+  Stap.5 Committing Changes 
+  -------------------------
+
+    Command-- Git Commit -M "Your Commit Message"  
+  
+  
+  
+  
+  
+  
+  Step.6 Sync fork Repository with original repository (Upstream) before pushing your changes to avoaid conflict
+  ----------------------------------------------------------------------------------------------------------------
+  
+  To synchronize fork with original repository (Upstream) we need to follow  manual process 
+  
+      
+           step.1 Add the original repository as remote 
+		   
+		         
+		    Cammand-- git remote add upstream <Original_repository_URL>
+			-------
+			
+		
+		   step.2 Fetch changes from upstream
+		   
+		   Fetch all branches and commits from the upstream repository
+		   
+		    
+		    command-- git fetch upstream
+			-------
+  
+           step.3 Merge Upstream Changes into your local Branch
+		   
+		    command-- git merge upstream
+			-------
+            		   
+           
+		   Step.4 Resolve any merge conflicts 
+		   
+		   If there are any merge onflicts, git will notify you. you need to manually resolve these conflicts in your files , then add and commit the changes.
+		   
+		   
+		   Step.5 Push the updated branch to your fork 
+		   
+		   Once you have resolved any conflicts and commited your changes , push the updated branch to your fork on github. 
+  
+  
+  
+  
+  
+  Step.7 Create a Pull Request
+  ----------------------------
+  
+   a. Open a Pull request
+   
+   
+    > Go to your repository on github
+	> Create a Pull request to merge your feature branch into your main branch of the original repository
+	> Provide a clear description of the changes and any relevent information.
+	
+   b. Code Review
+   
+   c. Once approved , the pull request is merged into the main branch.
+  
+
+							
+							
+  
+41. What is the difference between git rebashing and  git merge ?
+==================================================================
+
+GIT rebase and GIT merge are both used to integrate changes from one branch into another branch in git , but they do it in different way:
+
+
+GIT merge --
+---------
+
+         Purpose: integrate changes from one branch into another branch by creating a new commit (a merge commit).
+
+         Usage: Typically used to integrate changes from feature branch into main branch 
+		 
+		 History: It preserves the history of all branches involved, showing exactly when branches diverged and when they were merged back together.
+		 
+		 Conflicts: Can result in merge conflicts that need to be resolved .
+		 
+		 
+		 
+GIT rebase --
+----------
+
+          Purpose: integrate changes from one branch into another by moving entire feature branch on the tip of the master branch which leads to create linear history .
+ 
+          Usage: Often used to cleanup a series of commits before integrate changes from one branch into another for avoiding merge commit. 
+		  
+		  History: It rewrites the commit history , which makes the history look as if all changes were made sequentially.
+		  
+		  
+
+
+42. Mention the difference between git revert and reset ?
+=========================================================
+
+
+GIT Reset-
+---------
+
+Git reset command is used to undo the changes introduced by specific commit by moving HEAD pointer to that commit but it delete commit history during moving HEAD pointer.
+
+
+Here’s what git reset does in different modes:
+
+
+         Soft Reset: Moves the HEAD to a different commit but keeps your changes in the working directory and staging area. It’s like undoing a commit but keeping your changes ready to be committed again.
+         ----------
+		 
+		             Command----git reset --soft <commit>
+		 
+		 
+		 
+         Mixed Reset: Moves the HEAD to a different commit but resets the staging area . Your changes remain in the working directory but are no longer staged for the next commit. It’s useful when you want to unstage changes.
+         -----------
+          
+		             Command----git reset --mixed <commit>
+		  
+		  
+		  
+		 Hard Reset: Moves the HEAD to a different commit and resets both the staging area and the working directory to match that commit. This means all changes made since the specified commit will be completely erased. It’s like starting fresh from that commit.
+         -----------
+
+
+                    Command-----git reset --hard <commit>
+
+
+GIT revert- git revert command is also used to  undo the changes introduced by a specific commit by creating a new commit that inverses the changes made by that specific commit.
+----------
+
+          
+		  Command-- git revert <commit_id>
+
+
+
+
+43. How to squash last N commits into a single commit?
+======================================================
+
+Command---------"git rebase -i HEAD~n"    ---- should apply in feature branch only not in master branch 
+
+
+
+44. What is git bisect? How do you use it to determine the source of a bug?
+===========================================================================
+
+
+Imagine you have a project with lots of changes (commits), and at some point, a bug sneaks in. You know the bug wasn't there in an earlier version (a "good" commit) but is definitely there in the current version (a "bad" commit).
+
+
+  Git bisect helps you find exactly which commit introduced the bug:
+
+   1.Start Bisecting:  You tell Git to start looking ((git bisect start)).
+   ------------------
+   
+                     command--- git bisect start
+
+   2.Mark Good and Bad:  You point out a commit where things were good (git bisect good <commit>), and a commit where the bug started (git bisect bad <commit>).
+   --------------------
+   
+                     command--- git bisect good <commit>
+					 
+					 command--- git bisect bad <commit>
+					 
+
+   3.Git Hunts for the Bug:  Git picks a commit in the middle of your good and bad points and asks you to check it.
+   ------------------------
+   
+   4.Test the Commit:  You test that commit to see if the bug is there.
+   ------------------
+   
+   5.Give Feedback:  Based on whether the bug is there or not, you tell Git (git bisect good if it’s good, git bisect bad if it’s bad).
+   ----------------
+   
+   6.Repeat Until Found:  Git keeps picking commits halfway between the good and bad ones, and you keep testing until Git finds the exact commit that introduced the bug.
+   ---------------------
+   
+   7.Get the Answer:  Git tells you the first bad commit where the bug started.
+   -----------------
+  
+  So, it’s like a detective helping you figure out which change made things go wrong in your code history. It saves a lot of time compared to manually checking each commit one by one.
+
+
+
+47. What is git cherry-pick?
+============================
+
+Git cherry-pick is a command used to pick a specific commit from a branch and apply the changes introduced by that specific commit onto the another branch . 
+
+
+   Command-- git cherry-pick <commit_id>
+   -------
+
+
+
+   comparison-  While git merge and git rebase do not merge single commit it merge the commit history as well
+   ----------
+
+
+48. What is git reflog?
+=======================
+
+
+
+  git log ----Displays the commit history of a repository
+  -------
+  
+  git reflog ----Records the history of HEAD movements in the repository.
+  ----------
+
+git log is for examining the commit history, while git reflog is for tracking movements of the HEAD pointer, often used for recovering lost commits or changes.
+
+
+
+
+
+
+
+__________________________________________________________
+GIT scenario based interview questions
+1. Describe the branching strategies that you have used ?
+2. How will you know in git if a branch has been already merged into master?
+3. How can you bring a new feature in the main branch?
+4. I want to delete branch both locally and remotely? how you can do that ?
+5. What is difference between 'git remote' and 'git clone'?
+6. How can you fix a broken commit?
+7. Why is it desirable or advisable to create an additional commit rather than amending an existing commit ?
+8. can you please tell me layman terminologies difference between git and github?
+9. How do you find  a list of files that has changed in a particular commit?
+10. One of your teammates accidentally deleted a branch, and has already pushed the changes to the centralgit repo.There are no other git repos,and none of your other teammates had a local copy, How would you recover this branch?
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+2. How will you know in git if a branch has been already merged into master?
+----------------------------------------------------------------------------
+
+   command--   git branch --merged master    [run this command in that branch only for which you are checking whether it is merged or not with master]
+   -------
+
+
+3. How can you bring a new feature in the main branch?
+------------------------------------------------------
+
+To bring a new feature into the main branch of a Git repository, you generally follow these steps:
+
+
+   step.1: Create a Feature Branch
+   ------
+   
+           command-  git checkout -b new-feature main
+		   
+   step.2: Implement Your Feature 
+   ------
+  
+           Make changes to your codebase to implement the new feature within this branch. You can create, modify, and delete files as needed.
+
+
+   step.3: Commit Your Changes 
+   -------
+
+           Once you've implemented part of or the entire feature, commit your changes to the feature branch:
+
+           
+		   command-  git add .
+           command-  git commit -m "Implemented new feature XYZ"
+
+   step.4: Push the Feature Branch 
+   -------
+	       Push your feature branch to the remote repository (if it's not already there):
+
+           command- git push origin new-feature
+		   
+		   
+   step.5: Create a Pull Request (PR) 
+   -------         
+
+   step.6: Review and Merge
+   -------   
+
+   step.7: Delete the Feature Branch
+   -------
+
+           command-    git branch -d new-feature               # Deletes the local branch
+           command-    git push origin --delete new-feature    # Deletes the remote branch
+
+
+
+
+
+4. I want to delete branch both locally and remotely? how you can do that ?
+---------------------------------------------------------------------------
+
+
+   Deletes the local branch---
+   -------------------------
+
+                              command-    git branch -d new-feature 
+
+
+   Deletes the remote branch---
+   --------------------------
+
+                              command-    git push origin --delete new-feature
+
+
+
+
+
+
+5. What is difference between 'git remote' and 'git clone'?
+-----------------------------------------------------------
+
+
+   git clone----git clone command is used to create a copy of a git repository on your local machine,it downloads the entire repository ,including all branches and commit history. It allows user to work on project locally.
+   ---------
+   git remote---git remote is a command in git used to manage connections to remote repositories.It allows you to list ,add,rename and remove connections to remote repositories.
+   ----------           
+             git remote -v (list out all remote repositories associated with your local repositories)
+             git remote add <name> <URL>
+             git remote rename <old_name> <new_name>
+             git remote remove <name>
+
+
+
+
+
+
+6. How can you fix a broken commit?
+-----------------------------------
+
+
+Fixing a broken commit typically involves correcting the mistake made in the commit or reverting changes. 
+
+   step.1: git revert <commit-hash>
+   
+   step.2: git push <remote-name> <branch-name>
+
+
+
+7. Why is it desirable or advisable to create an additional commit rather than amending an existing commit ?
+------------------------------------------------------------------------------------------------------------
+
+creating separate commits for different changes makes the history of your code cleaner and more understandable. It's like writing clear, organized notes that anyone can follow without getting lost in corrections or changes that are mixed together.
+
+
+
+8. can you please tell me layman terminologies difference between git and github?
+---------------------------------------------------------------------------------
+
+
+   GIT--- Git is the tool that helps you manage versions of your files locally.
+   ---
+    
+   GITHUB---GitHub is a platform where you can store and share those files with others online.
+   ------
+
+9. How do you find  a list of files that has changed in a particular commit?
+----------------------------------------------------------------------------
+
+
+   Command--  git show --name-only <commit_id>
+
+
+10. One of your teammates accidentally deleted a branch, and has already pushed the changes to the centralgit repo.There are no other git repos,and none of your other teammates had a local copy, How would you recover this branch?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Assume the "feature-branch" was accidentally deleted after commit c0ffee1 was made, and the deletion was recorded in the reflog of origin/feature-branch. To recover:
+            --------------
+
+   Step.1    git reflog show origin/feature-branch     (find out the commit hash of feature branch which is deleted)
+   ------
+
+   Step.2    git checkout -b feature-branch <commit_hash>
+   ------
+
+
+
+
+
+
+
+24. What work is restored when the deleted branch is recovered ?
+17. What is git revert , git reset and git stashing ?
+30. Describe the branching strategies that you have used ?
+31. Explain the advantages of forking workflow?
+35. How do you return a commit that has just been pushed and made open ?
+40. What are the different ways by which you can refer to a commit  ?
+45. How to integrate git with Jenkins ?
+
+
+
+origin---If you fork a repository on github and then clone your fork to your local mahine , origin will be set to your fork's repository URL.
+
+Upstream-- upstream refers to the original repository from which your fork was created.
+
+
+or
+
+origin-- points to your forked repository
+
+upstream-- points to your original repository 
