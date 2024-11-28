@@ -1,0 +1,6 @@
+    git --version
+    git status
+    git add.
+    git rm --cached testing.py
+    git commit -m "first commit"
+    git restore testing.py
